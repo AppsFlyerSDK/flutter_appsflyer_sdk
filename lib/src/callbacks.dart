@@ -2,27 +2,27 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 
-const _channel = const MethodChannel('callbacks');
+const _channel = MethodChannel('callbacks');
 
-typedef void MultiUseCallback(dynamic msg);
-typedef void CancelListening();
+typedef MultiUseCallback = void Function(dynamic msg);
+typedef CancelListening = void Function();
 
-Map<String, MultiUseCallback> _callbacksById = new Map();
+Map<String, MultiUseCallback> _callbacksById = {};
 
 Future<void> _methodCallHandler(MethodCall call) async {
   switch (call.method) {
     case 'callListener':
       try {
-        dynamic callMap = jsonDecode(call.arguments);
+        final callMap = jsonDecode(call.arguments);
         switch (callMap["id"]) {
           case "onAppOpenAttribution":
           case "onInstallConversionData":
           case "onDeepLinking":
           case "validatePurchase":
           case "generateInviteLinkSuccess":
-            String data = callMap["data"];
-            Map? decodedData = jsonDecode(data);
-            Map fullResponse = {
+            final String data = callMap["data"];
+            final Map<String, dynamic>? decodedData = jsonDecode(data);
+            final fullResponse = <String, dynamic>{
               "status": callMap['status'],
               "payload": decodedData
             };
