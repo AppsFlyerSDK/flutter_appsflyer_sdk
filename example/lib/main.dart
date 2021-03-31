@@ -1,9 +1,9 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import './main_page.dart';
-import 'package:flutter/material.dart';
 
 Future<void> main() async {
   await DotEnv().load('.env');
@@ -13,8 +13,9 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new MainPage(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MainPage(),
     );
   }
 }

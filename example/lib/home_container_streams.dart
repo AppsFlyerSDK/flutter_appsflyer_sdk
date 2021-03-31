@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:appsflyer_sdk_example/text_border.dart';
-import 'package:appsflyer_sdk_example/utils.dart';
 import 'package:flutter/material.dart';
 
 import 'app_constants.dart';
+import 'text_border.dart';
+import 'utils.dart';
 
 class HomeContainerStreams extends StatefulWidget {
   final Stream<Map> onData;
@@ -20,7 +20,7 @@ class HomeContainerStreams extends StatefulWidget {
 class _HomeContainerStreamsState extends State<HomeContainerStreams> {
   final String eventName = "my event";
 
-  final Map eventValues = {
+  final Map<String, String> eventValues = {
     "af_content_id": "id123",
     "af_currency": "USD",
     "af_revenue": "2"
@@ -33,7 +33,7 @@ class _HomeContainerStreamsState extends State<HomeContainerStreams> {
     return SingleChildScrollView(
       child: Container(
         child: Padding(
-          padding: EdgeInsets.all(AppConstants.CONTAINER_PADDING),
+          padding: EdgeInsets.all(AppConstants.containerPadding),
           child: Column(
             children: <Widget>[
               Text(
@@ -41,7 +41,7 @@ class _HomeContainerStreamsState extends State<HomeContainerStreams> {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Padding(
-                padding: EdgeInsets.only(top: AppConstants.TOP_PADDING),
+                padding: EdgeInsets.only(top: AppConstants.topPadding),
               ),
               StreamBuilder<dynamic>(
                   stream: widget.onData?.asBroadcastStream(),
